@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Allanda Soares",
+      "email": "allandasoares7@gmail.com",
+      "password": "123",
+      "profile": "admin"
+    },
+    {
+      "id": 2,
+      "name": "Matheus Filho",
+      "email": "matheus@gmail.com",
+      "password": "123",
+      "profile": "user"
+    }
+  ]
+}
