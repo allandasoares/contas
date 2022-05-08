@@ -10,8 +10,6 @@ export const initialValues = {
   password: "",
 };
 
-export var userProfile = "";
-
 function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState<any>(initialValues);
@@ -38,7 +36,14 @@ function Login() {
 
     res.current.some((item: any) => {
       if (item.email === values.email && item.password === values.password) {
-        userProfile = item.profile;
+        //Save in localstorage
+        const userProfile = {
+          name: item.name,
+          profile: item.profile,
+        };
+        localStorage.setItem("data", JSON.stringify(userProfile));
+
+        //Redirect to home
         navigate("/home");
         return true;
       } else {
@@ -49,13 +54,20 @@ function Login() {
 
   return (
     <div className="containerLogin">
-      <div className="headerLogin">
-        <img src="/ico.ico" alt="icone" className="iconC" />
-        {/* <label className="headerAbout">About</label> */}
+      <div className="headerLogin"
+      >
+        <img src="/favicon.ico" alt="icone" className="iconC" onClick={() => {
+          navigate("/login");
+        }}/>
+        {/* <label className="headerAbout" onClick={() => {navigate("/about")}}>About</label> */}
       </div>
 
+      {/* <div className="introductionLogin">
+        <p>Hello! Welcome to the Contas system</p>
+      </div> */}
+
       <div className="ilustracaoContainer">
-        <img src="/ilustracao.svg" alt="ilustracao" className="ilustracao" />
+        <img src="/illustration.svg" alt="ilustracao" className="ilustracao" />
       </div>
 
       <div className="bodyLogin">
@@ -81,21 +93,23 @@ function Login() {
                 onChange={handleChange}
               />
             </div>
+
             <div className="colButton">
               <Button>Send</Button>
             </div>
+
+            <div className="colRegister">
+              <p>Don't have an account? Register</p>
+            </div>
           </form>
         </div>
-
-        <br />
-        <img src="/wave.svg" alt="ilustracao" className="wave" />
       </div>
 
-      <footer>
+      {/* <footer>
         <p className="footer">
-          © 2022 - Allanda Soares | Todos os direitos reservados
+          © 2022 - ALLANDA SOARES | TODOS OS DIREITOS RESERVADOS
         </p>
-      </footer>
+      </footer> */}
     </div>
   );
 }

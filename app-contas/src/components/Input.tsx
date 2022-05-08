@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 const InputStyled = styled.input`
-  width: 300px;
+  width: 330px;
   outline: 0;
   border-width: 0 0 2px;
   /* border-color: #706f6f; */
   font-size: 18px;
   background-color: transparent;
   &:focus {
-    border-color: #3e7e59;
+    border-color: #1cd594;
   }
 `;
 
