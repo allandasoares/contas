@@ -12,6 +12,7 @@ export const initialValues = {
 
 function Login() {
   const navigate = useNavigate();
+  const [register, setRegister] = useState(false);
   const [values, setValues] = useState<any>(initialValues);
   const res = useRef([]);
 
@@ -54,12 +55,21 @@ function Login() {
 
   return (
     <div className="containerLogin">
-      <div className="headerLogin"
-      >
+      <div className="headerLogin">
         <img src="/favicon.ico" alt="icone" className="iconC" onClick={() => {
           navigate("/login");
         }}/>
-        {/* <label className="headerAbout" onClick={() => {navigate("/about")}}>About</label> */}
+
+        {/* <div className="headerAbout">
+          <label
+            style={{ cursor: "pointer" }}
+            onClick={() => {
+              navigate("/about");
+            }}
+          >
+            About
+          </label>
+        </div> */}
       </div>
 
       {/* <div className="introductionLogin">
@@ -98,7 +108,7 @@ function Login() {
               <Button>Send</Button>
             </div>
 
-            <div className="colRegister">
+            <div className="colRegister" >
               <p>Don't have an account? Register</p>
             </div>
           </form>

@@ -16,7 +16,8 @@ body {
 
 .containerLogin {
   display: flex;
-  color: white;
+  /* color: white; */
+  color: #656767;
   font-family: Optima, sans-serif;
   font-variant: all-small-caps;
 }
@@ -29,7 +30,7 @@ body {
 .headerLogin .headerAbout {
   margin-left: auto;
   font-size: 20px;
-  cursor: pointer;
+  /* color: #4b4f4f; */
 }
 
 .headerLogin .iconC {
