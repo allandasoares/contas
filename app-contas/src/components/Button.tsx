@@ -1,25 +1,25 @@
 import styled from "styled-components";
 
- const ButtonStyled = styled.button`
+const ButtonStyled = styled.button`
   margin-top: 50px;
   margin-left: -30px;
-  width: 83px;
-  height: 41px;
-  background-color: #33ab5f;
+  width: 95px;
+  height: 40px;
+  background-color: #1cd594;
   color: #ffffff;
   border: none;
-  border-radius: 2px;
+  border-radius: 40px;
   cursor: pointer;
 
   &:hover {
-    background: #4fa071;
+    background: #1fe9a2;
   }
 `;
 
-function Button(props: any){
-  return(
+function Button(props: any) {
+  return (
     <>
-    <ButtonStyled {...props} ></ButtonStyled>
+      <ButtonStyled {...props}></ButtonStyled>
     </>
   );
 }

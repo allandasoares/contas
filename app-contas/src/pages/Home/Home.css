@@ -1,3 +1,18 @@
-.containerHome{
-    color: white;
+.containerHome {
+  color: white;
+}
+
+.headerHome {
+  display: flex;
+  align-items: flex-start;
+  font-size: 30px;
+}
+
+.headerHome .iconC {
+  width: 60px;
+  cursor: pointer;
+}
+
+.headerMenu{
+  margin-left: auto;
 }

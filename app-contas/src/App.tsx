@@ -1,9 +1,12 @@
 import React from "react";
+import UserProvider from "./context/UserContext";
 import Router from "./routes/routes";
 
 function App() {
   return (
-    <Router/>
+    <UserProvider>
+      <Router/>
+    </UserProvider>
   );
 }
 
