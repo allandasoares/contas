@@ -1,15 +1,15 @@
 const sequelize = require('../config/sequelize');
 const Sequelize = require('sequelize')
 
-const UsuariosModel = require('./usuariosModel');
-const usuariosModel = UsuariosModel(sequelize, Sequelize.DataTypes);
+const UserModel = require('./userModel');
+const user = UserModel(sequelize, Sequelize.DataTypes);
 
-const PerfilModel = require('./perfilModel');
-const perfilModel = PerfilModel(sequelize, Sequelize.DataTypes);
+const ProfileModel = require('./profileModel');
+const profile = ProfileModel(sequelize, Sequelize.DataTypes);
 
 const db = {
-    usuariosModel,
-    perfilModel,
+    user,
+    profile,
     sequelize
 }
 

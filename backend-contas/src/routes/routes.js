@@ -1,21 +1,43 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const {usuariosModel} = require('../models/usuariosModel')
+const { userModel } = require("../models/userModel");
+const controllerUser = require("../controllers/userController");
 
-//Main route
-router.get('/', (req, res) => {
-    res.send('Deu certo ')
-})
+//================================USER================================//
+//Create
+router.post("/usuarios", async (req, res) => {
+  const { nome, email, senha, perfil_id } = req.body;
+  const user = await controllerUser.create({ nome, email, senha, perfil_id });
+  res.json(user);
+});
 
-//Login route
-router.get('/login', (req, res) => {
-    res.send('Está no login')
-})
-router.post('/login', (req, res) => {
-    const {nome, email, senha, perfil_id} = req.body;
-})
+//Delete
+router.delete("/usuarios/:id", async (req, res) => {
+  const { id } = req.params;
+  const user = await controllerUser.delete(id);
+  res.json(user);
+});
 
-//Return json
-//app.use(express.json())
+//Index
+router.get("/usuarios", async (req, res) => {
+  const users = await controllerUser.index();
+  res.json(users);
+});
 
-module.exports = router
+//Show
+router.get("/usuarios/:id", async (req, res) => {
+  const { id } = req.params;
+  const users = await controllerUser.show(id);
+  res.json(users);
+});
+
+//Update
+router.put("/usuarios/:id", async (req, res) => {
+  const { id } = req.params;
+  const { nome, email, senha, perfil_id } = req.body;
+  const user = await controllerUser.update(id, { nome, email, senha, perfil_id });
+  res.json(user);
+});
+
+//===============================PROFILE===============================//
+module.exports = router;
