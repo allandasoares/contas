@@ -1,5 +1,6 @@
-const perfilModel = (sequelize, DataTypes) => {
-  const PerfilModel = sequelize.define(
+//Create user model
+const profile = (sequelize, DataTypes) => {
+  const ProfileModel = sequelize.define(
     "Perfil",
     {
       tipo: {
@@ -14,7 +15,7 @@ const perfilModel = (sequelize, DataTypes) => {
       tableName: "perfil",
     }
   );
-  return PerfilModel;
+  return ProfileModel;
 };
 
-module.exports = perfilModel;
+module.exports = profile;

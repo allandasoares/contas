@@ -1,5 +1,5 @@
-const usuariosModel = (sequelize, DataTypes) => {
-  const UsuariosModel = sequelize.define(
+const userModel = (sequelize, DataTypes) => {
+  const UserModel = sequelize.define(
     "Usuarios",
     {
       nome: {
@@ -21,7 +21,7 @@ const usuariosModel = (sequelize, DataTypes) => {
     }
   );
 
-  return UsuariosModel;
+  return UserModel;
 };
 
-module.exports = usuariosModel;
+module.exports = userModel;
