@@ -91,13 +91,16 @@ body {
   margin-top: 30px;
 }
 
-.areaLogin .colButton {
-  text-align: center;
+.areaLogin .colEmail{
+  margin-top: 30px;
 }
 
-.areaLogin .colRegister {
-  margin-top: 70px;
-  font-size: 20px;
+.areaLogin .colProfile{
+  margin-top: 30px;
+}
+
+.areaLogin .colButton {
+  text-align: center;
 }
 
 footer {

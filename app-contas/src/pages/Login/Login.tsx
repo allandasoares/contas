@@ -4,8 +4,9 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import api from "../../services/Api";
+import { toast } from 'react-hot-toast';
 
-export const initialValues = {
+const initialValues = {
   email: "",
   password: "",
 };
@@ -18,7 +19,7 @@ function Login() {
 
   useEffect(() => {
     api
-      .get("/users")
+      .get("/usuarios")
       .then((response) => {
         res.current = response.data;
       })
@@ -27,28 +28,30 @@ function Login() {
       });
   }, []);
 
+  //Saved changes
   function handleChange(event: any) {
     const { name, value } = event.target;
     setValues({ ...values, [name]: value });
   }
 
+  //Submit user
   function handleSubmit(event: any) {
     event.preventDefault();
 
     res.current.some((item: any) => {
-      if (item.email === values.email && item.password === values.password) {
+      if (item.email === values.email && item.senha === values.password) {
         //Save in localstorage
         const userProfile = {
-          name: item.name,
-          profile: item.profile,
+          name: item.nome,
+          profile: item.perfil_id,
         };
-        localStorage.setItem("data", JSON.stringify(userProfile));
+        localStorage.setItem("contas", JSON.stringify(userProfile));
 
         //Redirect to home
         navigate("/home");
-        return true;
-      } else {
-        console.log("No :( ");
+      } else if (item.email != values.email && item.senha != values.password) {
+        //Redirect to register
+        navigate("/register");
       }
     });
   }
@@ -56,9 +59,14 @@ function Login() {
   return (
     <div className="containerLogin">
       <div className="headerLogin">
-        <img src="/favicon.ico" alt="icone" className="iconC" onClick={() => {
-          navigate("/login");
-        }}/>
+        <img
+          src="/favicon.ico"
+          alt="icone"
+          className="iconC"
+          onClick={() => {
+            navigate("/login");
+          }}
+        />
 
         {/* <div className="headerAbout">
           <label
@@ -98,7 +106,7 @@ function Login() {
               <Input
                 name="password"
                 value={values.password}
-                label="Senha"
+                label="Password"
                 type="password"
                 onChange={handleChange}
               />
@@ -108,8 +116,11 @@ function Login() {
               <Button>Send</Button>
             </div>
 
-            <div className="colRegister" >
-              <p>Don't have an account? Register</p>
+            <div className="colRegister">
+              <p>
+                Don't have an account?
+                <a href="/register">Register</a>
+              </p>
             </div>
           </form>
         </div>

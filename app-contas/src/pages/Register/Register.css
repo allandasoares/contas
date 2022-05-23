@@ -1,0 +1,92 @@
+body {
+    background-image: url(../../../public/mesh.png);
+    background-size: cover;
+  }
+  
+  .containerRegister {
+    display: flex;
+    /* color: white; */
+    color: #656767;
+    font-family: Optima, sans-serif;
+    font-variant: all-small-caps;
+  }
+  
+  .headerRegister {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .headerRegister .headerAbout {
+    margin-left: auto;
+    font-size: 20px;
+    /* color: #4b4f4f; */
+  }
+  
+  .headerRegister .iconC {
+    margin: 40px;
+    width: 40px;
+    cursor: pointer;
+  }
+  
+  .containerRegister .ilustracao {
+    width: 661px;
+    margin-top: 293px;
+    margin-left: -69px;
+  }
+  
+  .containerRegister .introductionRegister {
+    position: absolute;
+    margin: 100px;
+    font-size: 20px;
+    font-family: sans-serif;
+  }
+  
+  .bodyRegister {
+    background-color: #131212;
+    margin-left: 250px;
+    border-radius: 18px;
+    width: 406px;
+    height: 580px;
+    margin-top: 60px;
+    padding: 0%;
+  }
+  
+  .bodyRegister .wave {
+    width: 406px;
+    border-radius: 18px;
+    margin-top: 3px;
+  }
+  
+  .bodyRegister h1 {
+    margin-top: 54px;
+  }
+  
+  .areaRegister {
+    font-size: 20px;
+  }
+  
+  .areaRegister h1 {
+    text-align: center;
+  }
+  
+  .areaRegister .formRegister {
+    margin-left: 30px;
+  }
+  
+  .areaRegister .colPassword {
+    margin-top: 30px;
+  }
+  
+  .areaRegister .colEmail{
+    margin-top: 30px;
+  }
+  
+  .areaRegister .colProfile{
+    margin-top: 30px;
+  }
+  
+  .areaRegister .colButton {
+    text-align: center;
+  }
+  
+  

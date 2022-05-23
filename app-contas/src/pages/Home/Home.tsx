@@ -24,7 +24,7 @@ function Home() {
   };
 
   //State of menu
-  var data = JSON.parse(localStorage.getItem("data"));
+  var data = JSON.parse(localStorage.getItem("contas"));
   const [initialMenu, setInitialMenu] = useState(data);
   var initialName = initialMenu.name[0];
   var initialProfile = initialMenu.profile;

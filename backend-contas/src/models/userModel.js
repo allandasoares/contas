@@ -7,6 +7,8 @@ const userModel = (sequelize, DataTypes) => {
       },
       email: {
         type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
       },
       senha: {
         type: DataTypes.STRING,
@@ -15,7 +17,7 @@ const userModel = (sequelize, DataTypes) => {
         type: DataTypes.INTEGER,
       },
     },
-    
+
     {
       tableName: "usuarios",
     }

@@ -1,9 +1,11 @@
 const express = require("express");
 const routes = require("./src/routes/routes");
 const app = express();
-const bodyParser = require('body-parser')
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const { sequelize } = require("./src/models/model");
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use("/", routes);
 
