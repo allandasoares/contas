@@ -1,0 +1,7 @@
+const path = require("path");
+
+module.exports = {
+  env: process.env.NODE_ENV,
+  "config": path.resolve("./src/config", "config.js"),
+  "migrations-path": path.resolve("./src/migrations"),
+};
