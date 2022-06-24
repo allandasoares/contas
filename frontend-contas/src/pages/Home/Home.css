@@ -1,0 +1,29 @@
+body{
+  background-color: rgb(47, 43, 43) !important;
+}
+
+.containerHome {
+  color: white;
+}
+
+.headerHome {
+  display: flex;
+  align-items: flex-start;
+  font-size: 30px;
+}
+
+/* .headerHome .iconC {
+  width: 60px;
+  cursor: pointer;
+} */
+
+.headerHome .iconC {
+  margin: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.headerMenu{
+  margin-left: auto;
+}
+

@@ -1,0 +1,14 @@
+.backgroundImage {
+  background-image: url(../../../public/mesh.png);
+  background-size: cover;
+  /* display: flex; */
+  width: 100vh;
+  height: 100vh;
+}
+
+.iconC {
+  display: flex;
+  width: 40px;
+  margin: 20px;
+  cursor: pointer;
+}
