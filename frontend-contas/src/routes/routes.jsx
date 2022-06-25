@@ -3,8 +3,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/Home/Home";
 
 import Login from "../pages/Login/Login";
-import Register from './../pages/Register/Register';
-import ListBank from './../pages/Bank/ListBank';
+import Register from '../pages/Register/Register';
+import ListBank from '../pages/Bank/ListBank';
+import ListExpense from "../pages/Expense/ListExpense";
+import Calendar from "../pages/Calendar/Calendar";
+import Card from "../pages/Card/Card";
 
 export default function Router() {
   return (
@@ -15,6 +18,9 @@ export default function Router() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/banks" element={ <ListBank/> }></Route>
+        <Route path="/expenses" element={ <ListExpense/> }></Route>
+        <Route path="/calendar" element={ <Calendar/> }></Route>
+        <Route path="/cards" element={ <Card/> }></Route>
       </Routes>
     </BrowserRouter>
   );

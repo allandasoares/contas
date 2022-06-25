@@ -9,7 +9,7 @@ import { Box, Grid } from "@mui/material";
 import { Fragment, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import SideMenu from "../../components/SideMenu/SideMenu";
-import api from "./../../services/Api";
+import api from "../../services/Api";
 import {
   Dialog,
   DialogActions,
@@ -18,10 +18,9 @@ import {
   DialogTitle,
   TextField,
 } from "@material-ui/core";
-// import Button from "./../../components/Button";
 
-export default function ListBank() {
-  const [banks, setBanks] = useState([]);
+function ListExpense() {
+  const [expenses, setExpenses] = useState([]);
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -32,9 +31,9 @@ export default function ListBank() {
 
   useEffect(() => {
     api
-      .get("/banks")
+      .get("/expenses")
       .then((response) => {
-        setBanks(response.data);
+        setExpenses(response.data);
       })
       .catch((error) => {
         toast.error("Erro ao buscar bancos");
@@ -47,7 +46,7 @@ export default function ListBank() {
         <Box className="backgroundHome">
           <br />
           <Grid container color={"#bbb5b5"}>
-            <Typography>Banks</Typography>
+            <Typography>Expenses</Typography>
             <Button
               size="small"
               variant="contained"
@@ -61,7 +60,7 @@ export default function ListBank() {
           {/* Modal  */}
           <Grid>
             <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>New Bank</DialogTitle>
+              <DialogTitle>New expense</DialogTitle>
               <DialogContent>
                 {/* <DialogContentText>
                   To subscribe to this website, please enter your email address
@@ -104,17 +103,19 @@ export default function ListBank() {
           <br />
 
           {/* Cards  */}
-          {banks.map((bank) => {
+          {expenses.map((expense) => {
             return (
               <Box sx={{ minWidth: 275 }}>
                 <Card variant="outlined" style={{ background: "#393333" }}>
                   <Fragment>
                     <CardContent>
-                      <Typography>{bank.nome}</Typography>
+                      <Typography>{expense.nome}</Typography>
                       <Typography>
-                        Saldo Inicial: {bank.saldo_inicial}
+                        Saldo Inicial: {expense.saldo_inicial}
                       </Typography>
-                      <Typography>Saldo Atual: {bank.saldo_atual}</Typography>
+                      <Typography>
+                        Saldo Atual: {expense.saldo_atual}
+                      </Typography>
                     </CardContent>
                     <CardActions>
                       <Button
@@ -143,3 +144,5 @@ export default function ListBank() {
     </>
   );
 }
+
+export default ListExpense;

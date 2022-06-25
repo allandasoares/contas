@@ -1,9 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import "./Home.css";
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import CardDash from "../../components/CardDash";
+import Card from "../Card/Card";
 
 function Home() {
   return (
@@ -56,6 +57,23 @@ function Home() {
               />
             </Grid>
           </Grid>
+
+          <Box
+            className="gradient"
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              "& > :not(style)": {
+                m: 1,
+                width: 270,
+                height: 128,
+                borderRadius: 6,
+                backgroundColor: "#5ba39b"
+              },
+            }}
+          >
+            <Paper />
+          </Box>
 
           {/* <Grid container>
             <h1>TE AMOOOOOOOO</h1>
