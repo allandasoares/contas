@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 
 import Login from "../pages/Login/Login";
 import Register from './../pages/Register/Register';
+import ListBank from './../pages/Bank/ListBank';
 
 export default function Router() {
   return (
@@ -13,6 +14,7 @@ export default function Router() {
         <Route path="/home" element={ <Home/> }></Route>
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
+        <Route path="/banks" element={ <ListBank/> }></Route>
       </Routes>
     </BrowserRouter>
   );

@@ -50,7 +50,7 @@ function Login() {
           alt="icone"
           className="iconC"
           onClick={() => {
-            navigate("/login");
+            navigate("/register");
           }}
         />
       </Grid>

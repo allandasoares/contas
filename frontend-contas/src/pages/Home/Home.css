@@ -1,5 +1,13 @@
-body{
-  background-color: rgb(47, 43, 43) !important;
+.backgroundHome{
+  /* background-color: rgb(47, 43, 43); */
+  background-color: #1b1b1f;
+  width: 100vw;
+  height: 100vh; /* Subtract the 10px top/bottom margins */
+  position: fixed;
+}
+
+.MuiDrawer-paperAnchorLeft{
+  background-color: #1b1b1f !important;
 }
 
 .containerHome {
