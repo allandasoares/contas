@@ -47,6 +47,12 @@ function TopBar() {
       });
   }, []);
 
+  function logout() {
+    navigate("/login");
+    localStorage.removeItem("token");
+    localStorage.clear();
+  }
+
   return (
     <>
       <AppBar position="fixed" style={{ zIndex: 9999 }}>
@@ -61,7 +67,12 @@ function TopBar() {
               }}
             />
           </Typography>
-          <IconButton style={{color: "#bbb5b5"}} onClick={ () => {navigate("/calendar")}}>
+          <IconButton
+            style={{ color: "#bbb5b5" }}
+            onClick={() => {
+              navigate("/calendar");
+            }}
+          >
             <CalendarMonthOutlinedIcon />
           </IconButton>
           {/* Menu  */}
@@ -121,6 +132,14 @@ function TopBar() {
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
             <MenuItem>{menu.profile}</MenuItem>
+            <MenuItem
+              style={{ backgroundColor: "#cd5d5d" }}
+              onClick={() => {
+                logout();
+              }}
+            >
+              Logout
+            </MenuItem>
           </Menu>
         </Toolbar>
       </AppBar>

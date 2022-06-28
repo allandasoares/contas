@@ -5,7 +5,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from '../pages/Register/Register';
 import ListBank from '../pages/Bank/ListBank';
-import ListExpense from "../pages/Expense/ListExpense";
+import ListExpense from "../pages/Transation/ListTransations";
 import Calendar from "../pages/Calendar/Calendar";
 import Card from "../pages/Card/Card";
 

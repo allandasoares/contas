@@ -11,8 +11,13 @@ function App() {
         position="top-right"
         gutter={8}
         containerClassName="toast-container-all"
-        containerStyle={{}}
+        containerStyle={{
+            zIndex: 99999
+        }}
         toastOptions={{
+          style: {
+            zIndex: 99999
+          },
           // Define default options
           className: "toast-container",
           duration: 5000,
