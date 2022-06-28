@@ -4,7 +4,7 @@ const controllerUser = require("../controllers/userController");
 const controllerProfile = require("../controllers/profileController");
 const controllerAccess = require("../controllers/accessController");
 const controllerCategory = require("../controllers/categoryController");
-const controllerExpense = require("../controllers/expenseController");
+const controllerTransation = require("../controllers/transationController");
 const controllerBank = require("../controllers/bankController");
 const jwt = require("jsonwebtoken");
 
@@ -79,175 +79,180 @@ router.post("/logout", verifyJwt, async (req, res) => {
 
 //===============================PROFILE===============================//
 //Create
-router.post("/profiles", verifyJwt, async (req, res) => {
+router.post("/profiles", async (req, res) => {
   const { tipo, acessos_id } = req.body;
-  const profiles = await controllerProfile.create({ tipo, acessos_id });
-  res.json(profiles);
+  const response = await controllerProfile.create({ tipo, acessos_id });
+  res.status(response.code).json(response);
 });
 
 //Delete
 router.delete("/profiles/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const profiles = await controllerProfile.delete(id);
-  res.json(profiles);
+  const response = await controllerProfile.delete(id);
+  res.status(response.code).json(response);
 });
 
 //Index
 router.get("/profiles", verifyJwt, async (req, res) => {
-  const profiles = await controllerProfile.index();
-  res.json(profiles);
+  const response = await controllerProfile.index();
+  res.status(response.code).json(response);
 });
 
 //Show
 router.get("/profiles/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const profiles = await controllerProfile.show(id);
-  res.json(profiles);
+  const response = await controllerProfile.show(id);
+  res.status(response.code).json(response);
 });
 
 //Update
 router.put("/profiles/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
   const { tipo, acessos_id } = req.body;
-  const profiles = await controllerProfile.update(id, { tipo, acessos_id });
-  res.json(profiles);
+  const response = await controllerProfile.update(id, { tipo, acessos_id });
+  res.status(response.code).json(response);
 });
 
 //===============================ACCESS===============================//
 //Create
-router.post("/access", verifyJwt, async (req, res) => {
-  const { login, register, home, contas, dash } = req.body;
-  const access = await controllerAccess.create({
+router.post("/access", async (req, res) => {
+  const { login, register, home, contas, bancos, dash } = req.body;
+  const response = await controllerAccess.create({
     login,
     register,
     home,
     contas,
+    bancos,
     dash,
   });
-  res.json(access);
+  res.status(response.code).json(response);
 });
 
 //Delete
 router.delete("/access/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const access = await controllerAccess.delete(id);
-  res.json(access);
+  const response = await controllerAccess.delete(id);
+  res.status(response.code).json(response);
 });
 
 //Index
 router.get("/access", verifyJwt, async (req, res) => {
-  const access = await controllerAccess.index();
-  res.json(access);
+  const response = await controllerAccess.index();
+  res.status(response.code).json(response);
 });
 
 //Show
 router.get("/access/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const access = await controllerAccess.show(id);
-  res.json(access);
+  const response = await controllerAccess.show(id);
+  res.status(response.code).json(response);
 });
 
 //Update
 router.put("/access/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const { login, register, home, contas, dash } = req.body;
-  const access = await controllerAccess.update(id, {
+  const { login, register, home, contas, bancos, dash } = req.body;
+  const response = await controllerAccess.update(id, {
     login,
     register,
     home,
     contas,
+    bancos,
     dash,
   });
-  res.json(access);
+  res.status(response.code).json(response);
 });
 
 //===============================CATEGORY===============================//
 //Create
 router.post("/category", verifyJwt, async (req, res) => {
   const { titulo, cor } = req.body;
-  const category = await controllerCategory.create({ titulo, cor });
-  res.json(category);
+  const response = await controllerCategory.create({ titulo, cor });
+  res.status(response.code).json(response);
 });
 
 //Delete
 router.delete("/category/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const category = await controllerCategory.delete(id);
-  res.json(category);
+  const response = await controllerCategory.delete(id);
+  res.status(response.code).json(response);
 });
 
 //Index
 router.get("/categories", verifyJwt, async (req, res) => {
-  const category = await controllerCategory.index();
-  res.json(category);
+  const response = await controllerCategory.index();
+  res.status(response.code).json(response);
 });
 
 //Show
 router.get("/category/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const category = await controllerCategory.show(id);
-  res.json(category);
+  const response = await controllerCategory.show(id);
+  res.status(response.code).json(response);
 });
 
 //Update
 router.put("/category/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
   const { titulo, cor } = req.body;
-  const category = await controllerCategory.update(id, { titulo, cor });
-  res.json(category);
+  const response = await controllerCategory.update(id, { titulo, cor });
+  res.status(response.code).json(response);
 });
 
-//===============================EXPENSE===============================//
+//===============================TRANSATION===============================//
 //Create
-router.post("/expense", verifyJwt, async (req, res) => {
+router.post("/transation", verifyJwt, async (req, res) => {
+  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA", req.body)
   const {
     titulo,
     descricao,
     valor,
     data_venc,
     data_pag,
+    tipo,
     status,
     modo_pagamento,
     categoria_id,
     banco_id,
   } = req.body;
 
-  const expense = await controllerExpense.create({
+  const response = await controllerTransation.create({
     titulo,
     descricao,
     valor,
     data_venc,
     data_pag,
+    tipo,
     status,
     modo_pagamento,
     categoria_id,
     banco_id,
   });
-  res.json(expense);
+  res.status(response.code).json(response);
 });
 
 //Delete
-router.delete("/expense/:id", verifyJwt, async (req, res) => {
+router.delete("/transation/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const expense = await controllerExpense.delete(id);
-  res.json(expense);
+  const response = await controllerTransation.delete(id);
+  res.status(response.code).json(response);
 });
 
 //Index
-router.get("/expenses", verifyJwt, async (req, res) => {
-  const expense = await controllerExpense.index();
-  res.json(expense);
+router.get("/transations", verifyJwt, async (req, res) => {
+  const response = await controllerTransation.index();
+  res.status(response.code).json(response);
 });
 
 //Show
-router.get("/expense/:id", verifyJwt, async (req, res) => {
+router.get("/transation/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const expense = await controllerExpense.show(id);
-  res.json(expense);
+  const response = await controllerTransation.show(id);
+  res.status(response.code).json(response);
 });
 
 //Update
-router.put("/expense/:id", verifyJwt, async (req, res) => {
+router.put("/transation/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
   const {
     titulo,
@@ -255,67 +260,69 @@ router.put("/expense/:id", verifyJwt, async (req, res) => {
     valor,
     data_venc,
     data_pag,
+    tipo,
     status,
     modo_pagamento,
     categoria_id,
     banco_id,
   } = req.body;
-  const expense = await controllerExpense.update(id, {
+  const response = await controllerTransation.update(id, {
     titulo,
     descricao,
     valor,
     data_venc,
     data_pag,
+    tipo,
     status,
     modo_pagamento,
     categoria_id,
     banco_id,
   });
-  res.json(expense);
+  res.status(response.code).json(response);
 });
 
 //===============================BANK===============================//
 //Create
 router.post("/bank", verifyJwt, async (req, res) => {
   const { nome, saldo_atual, saldo_inicial } = req.body;
-  const bank = await controllerBank.create({
+  const response = await controllerBank.create({
     nome,
     saldo_atual,
     saldo_inicial,
   });
-  res.json(bank);
+  res.status(response.code).json(response);
 });
 
 //Delete
 router.delete("/bank/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const bank = await controllerBank.delete(id);
-  res.json(bank);
+  const response = await controllerBank.delete(id);
+  res.status(response.code).json(response);
 });
 
 //Index
 router.get("/banks", verifyJwt, async (req, res) => {
-  const bank = await controllerBank.index();
-  res.json(bank);
+  const response = await controllerBank.index();
+  res.status(response.code).json(response);
 });
 
 //Show
 router.get("/bank/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
-  const bank = await controllerBank.show(id);
-  res.json(bank);
+  const response = await controllerBank.show(id);
+  res.status(response.code).json(response);
 });
 
 //Update
 router.put("/bank/:id", verifyJwt, async (req, res) => {
   const { id } = req.params;
   const { nome, saldo_atual, saldo_inicial } = req.body;
-  const bank = await controllerBank.update(id, {
+  const response = await controllerBank.update(id, {
     nome,
     saldo_atual,
     saldo_inicial,
   });
-  res.json(bank);
+  res.status(response.code).json(response);
 });
 
 module.exports = router;

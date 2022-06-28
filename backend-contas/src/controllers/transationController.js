@@ -1,31 +1,31 @@
-const { Category } = require("../models/model");
+const { Transation } = require("../models/model");
 const APIReturnMessage = require("../utils/APIReturnMessage");
 
-controllerCategory = {
-  create: async (categoryData) => {
+controllerTransation = {
+  create: async (transationData) => {
     try {
-      const category = await Category.create(categoryData);
+      const transation = await Transation.create(transationData);
 
-      if (category) {
+      if (transation) {
         return APIReturnMessage({
           code: 200,
           success: true,
-          message: "A categoria foi criado com sucesso",
-          data: category,
+          message: "Sucesso ao cadastrar uma nova transação",
+          data: transation,
         });
       }
 
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Não foi possível criar a categoria",
+        message: "Erro ao cadastrar uma nova transação",
         data: null,
       });
     } catch (error) {
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Erro ao criar a categoria",
+        message: "Erro ao cadastrar uma nova transação",
         data: null,
       });
     }
@@ -33,32 +33,32 @@ controllerCategory = {
 
   delete: async (id) => {
     try {
-      let categoryDeleted = await Category.destroy({
+      let transationDeleted = await Transation.destroy({
         where: {
           id: id,
         },
       });
 
-      if (categoryDeleted) {
+      if (transationDeleted) {
         return APIReturnMessage({
           code: 200,
           success: true,
-          message: "A categoria foi excluída com sucesso",
-          data: categoryDeleted,
+          message: "Sucesso ao excluir a transação",
+          data: transationDeleted,
         });
       }
 
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Não foi possível excluir a categoria",
+        message: "Erro ao excluir a transação",
         data: null,
       });
     } catch (error) {
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Erro ao excluir a categoria",
+        message: "Erro ao excluir uma nova transação",
         data: null,
       });
     }
@@ -66,30 +66,28 @@ controllerCategory = {
 
   update: async (id, data) => {
     try {
-      const category = await Category.update(data, {
-        where: { id: id },
-      });
+      const transation = await Transation.update(data, { where: { id: id } });
 
-      if (category) {
+      if (transation) {
         return APIReturnMessage({
           code: 200,
           success: true,
-          message: "A categoria foi editada com sucesso",
-          data: category,
+          message: "Sucesso ao editar a transação",
+          data: transation,
         });
       }
 
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Não foi possível editar a categoria",
+        message: "Erro ao editar a transação",
         data: null,
       });
     } catch (error) {
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Erro ao editar a categoria",
+        message: "Erro ao editar a transação",
         data: null,
       });
     }
@@ -97,32 +95,34 @@ controllerCategory = {
 
   index: async () => {
     try {
-      let category = await Category.findAll();
-
-      category.map((item) => {
-        console.log(item);
+      let transations = await Transation.findAll({
+        include: ["categoria", "banco"],
       });
 
-      if (category) {
+      if (transations) {
+        transations.map((item) => {
+          console.log(item);
+        });
+
         return APIReturnMessage({
           code: 200,
           success: true,
-          message: "Sucesso ao buscar categorias",
-          data: category,
+          message: "Sucesso ao buscar transações",
+          data: transations,
         });
       }
 
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Não foi possível buscar categorias",
+        message: "Nenhuma despeza cadastrada",
         data: null,
       });
     } catch (error) {
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Erro ao buscar as categorias",
+        message: "Erro ao buscar transações",
         data: null,
       });
     }
@@ -130,36 +130,34 @@ controllerCategory = {
 
   show: async (id) => {
     try {
-      let category = await Category.findOne({
-        where: {
-          id: id,
-        },
+      let transation = await Transation.findByPk(id, {
+        include: ["categoria", "banco"],
       });
 
-      if (category) {
+      if (transation) {
         return APIReturnMessage({
           code: 200,
           success: true,
-          message: "Sucesso ao buscar categoria",
-          data: category,
+          message: "Sucesso ao buscar transação",
+          data: transation,
         });
       }
 
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Não foi possível buscar categoria",
+        message: "Sem transação cadastrada",
         data: null,
       });
     } catch (error) {
       return APIReturnMessage({
         code: 500,
         success: false,
-        message: "Erro ao buscar as categoria",
+        message: "Erro ao buscar transação",
         data: null,
       });
     }
   },
 };
 
-module.exports = controllerCategory;
+module.exports = controllerTransation;

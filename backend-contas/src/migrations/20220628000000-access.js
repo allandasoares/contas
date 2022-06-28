@@ -21,6 +21,9 @@ module.exports = {
       contas: {
         type: Sequelize.STRING
       },
+      bancos: {
+        type: Sequelize.STRING
+      },
       dash: {
         type: Sequelize.STRING
       },

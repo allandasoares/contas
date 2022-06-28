@@ -2,30 +2,41 @@
 
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-  class Expense extends Model {}
+  class Transation extends Model {}
 
-  Expense.init(
+  Transation.init(
     {
       titulo: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       descricao: {
         type: DataTypes.STRING,
+        allowNull: true,
       },
       valor: {
         type: DataTypes.DECIMAL(10, 2),
+        allowNull: false,
       },
       data_venc: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       data_pag: {
         type: DataTypes.STRING,
+        allowNull: true,
+      },
+      tipo: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       status: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       modo_pagamento: {
         type: DataTypes.STRING,
+        allowNull: false,
       },
       categoria_id: {
         type: DataTypes.STRING,
@@ -42,9 +53,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       sequelize,
-      modelName: "Expense",
-      tableName: "despesas",
+      modelName: "Transation",
+      tableName: "transacoes",
     }
   );
-  return Expense;
+  return Transation;
 };

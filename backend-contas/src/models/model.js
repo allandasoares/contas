@@ -13,8 +13,8 @@ const Access = AccessModel(sequelize, Sequelize.DataTypes);
 const CategoryModel = require("./Category");
 const Category = CategoryModel(sequelize, Sequelize.DataTypes);
 
-const ExpenseModel = require("./Expense");
-const Expense = ExpenseModel(sequelize, Sequelize.DataTypes);
+const TransationModel = require("./Transation");
+const Transation = TransationModel(sequelize, Sequelize.DataTypes);
 
 const BankModel = require("./Bank");
 const Bank = BankModel(sequelize, Sequelize.DataTypes);
@@ -24,7 +24,7 @@ module.exports = {
   Profile,
   Access,
   Category,
-  Expense,
+  Transation,
   Bank,
 };
 
@@ -38,12 +38,12 @@ Profile.belongsTo(Access, {
   foreignKey: "acessos_id",
 });
 
-Expense.belongsTo(Category, {
+Transation.belongsTo(Category, {
   as: "categoria",
   foreignKey: "categoria_id",
 });
 
-Expense.belongsTo(Bank, {
+Transation.belongsTo(Bank, {
   as: "banco",
   foreignKey: "banco_id",
 });

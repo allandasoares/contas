@@ -18,6 +18,9 @@ module.exports = (sequelize, DataTypes) => {
       contas: {
         type: DataTypes.STRING,
       },
+      bancos: {
+        type: DataTypes.STRING,
+      },
       dash: {
         type: DataTypes.STRING,
       },
