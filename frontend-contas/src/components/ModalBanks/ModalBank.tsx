@@ -18,7 +18,7 @@ const values = {
   saldoAtual: "",
 };
 
-function ModalBank({ open, setOpen, refreshBanks, bank }) {
+function ModalBank({ openBank, setOpenBank, refreshBanks, bank }) {
   const formik = useFormik({
     initialValues: values,
     onSubmit: (event) => {
@@ -28,16 +28,15 @@ function ModalBank({ open, setOpen, refreshBanks, bank }) {
   const [cancel, setCancel] = useState(false);
 
   useEffect(() => {
-    if (cancel) {
-      formik.setValues(values);
-      setOpen(false);
+    if (!openBank) {
+      formik.resetForm();
     }
-  }, [cancel]);
+  }, [openBank]);
 
   //Submit form
   function handleSubmit() {
     if (cancel) return;
-    console.log("entrou aqui");
+
     const params = {
       nome: formik.values.name,
       saldo_inicial: formik.values.saldoInicial,
@@ -48,13 +47,14 @@ function ModalBank({ open, setOpen, refreshBanks, bank }) {
       .post("/bank", params)
       .then((response) => {
         toast.success("Created bank!");
-        setOpen(false);
+        setOpenBank(false);
         refreshBanks();
       })
       .catch((error) => {
         toast.error("Error");
       })
       .finally(() => formik.setSubmitting(false));
+    formik.resetForm();
   }
 
   return (
@@ -62,9 +62,9 @@ function ModalBank({ open, setOpen, refreshBanks, bank }) {
       {/* Modal  */}
       <div>
         <Dialog
-          open={open}
+          open={openBank}
           onClose={() => {
-            setOpen(false);
+            setOpenBank(false);
           }}
         >
           <form onSubmit={formik.handleSubmit}>
@@ -116,6 +116,7 @@ function ModalBank({ open, setOpen, refreshBanks, bank }) {
               <Button
                 onClick={() => {
                   setCancel(true);
+                  setOpenBank(false);
                 }}
               >
                 Cancel

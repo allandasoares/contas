@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "./../../services/Api";
-import CalendarMonthOutlinedIcon from "@mui/icons-material/CalendarMonthOutlined";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const initialMenu = {
   name: "",
@@ -55,8 +55,14 @@ function TopBar() {
 
   return (
     <>
-      <AppBar position="fixed" style={{ zIndex: 9999 }}>
-        <Toolbar sx={{ backgroundColor: "#1b1b1f", border: "0px" }}>
+      <AppBar position="fixed" style={{ zIndex: 9999, boxShadow: "none" }}>
+        <Toolbar
+          style={{
+            backgroundColor: "#1b1b1f",
+            border: "0px",
+            paddingLeft: "0px",
+          }}
+        >
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             <img
               src="/favicon.ico"
@@ -67,13 +73,14 @@ function TopBar() {
               }}
             />
           </Typography>
+
           <IconButton
             style={{ color: "#bbb5b5" }}
             onClick={() => {
               navigate("/calendar");
             }}
           >
-            <CalendarMonthOutlinedIcon />
+            <CalendarMonthIcon />
           </IconButton>
           {/* Menu  */}
           <Box
@@ -131,7 +138,13 @@ function TopBar() {
             transformOrigin={{ horizontal: "right", vertical: "top" }}
             anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
           >
-            <MenuItem>{menu.profile}</MenuItem>
+            <MenuItem>
+              {menu.profile == "1"
+                ? "Comum"
+                : menu.profile == "2"
+                ? "Premium"
+                : "Visitante"}
+            </MenuItem>
             <MenuItem
               style={{ backgroundColor: "#cd5d5d" }}
               onClick={() => {

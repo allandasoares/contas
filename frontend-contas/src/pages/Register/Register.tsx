@@ -5,7 +5,7 @@ import Input from "./../../components/Input";
 import Button from "./../../components/Button";
 import "./Register.css";
 import toast from "react-hot-toast";
-import { Box, Grid, Paper } from "@material-ui/core";
+import { Box, Grid, InputLabel, MenuItem, Paper, Select } from "@material-ui/core";
 
 const initialValues = {
   nome: "",
@@ -175,14 +175,27 @@ function Register() {
                     xl={12}
                     style={{ marginTop: "30px" }}
                   >
-                    <Input
+                    {/* <Button style={{ background: "#23cc8e" }}>Comum</Button>
+                    <Button style={{ background: "#23cc8e", marginLeft: 30 }}>Premium</Button> */}
+                    <InputLabel style={{ marginTop: 30, color: "#bbb5b5" }}>Profile</InputLabel>
+                    <Select
+                      style={{ width: "100%", height: "100%", color: "#bbb5b5" }}
+                      label="Profile"
+                      name="perfil_id"
+                      value={values.perfil_id}
+                      onChange={handleChange}
+                    >
+                      <MenuItem value={1}>Comum</MenuItem>
+                      <MenuItem value={2}>Premium</MenuItem>
+                    </Select>
+                    {/* <Input
                       name="perfil_id"
                       value={values.perfil_id}
                       label="Profile"
                       type="profile"
                       onChange={handleChange}
                       style={{ color: "#bbb5b5" }}
-                    />
+                    /> */}
                   </Grid>
 
                   <Grid

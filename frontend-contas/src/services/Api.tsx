@@ -22,7 +22,6 @@ api.interceptors.response.use(
     const status = error ? error.response.status : null;
 
     if (status == 401) {
-      console.log("entrou aqui");
       window.location.href = "/login";
       localStorage.removeItem("token");
       toast.error("Sessão expirada");

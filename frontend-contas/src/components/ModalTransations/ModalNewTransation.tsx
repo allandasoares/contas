@@ -21,7 +21,7 @@ const values = {
   description: "",
   value: "",
   dateExpect: new Date(),
-  payday: new Date(),
+  payday: "",
   type: "",
   status: "",
   paymentMode: "",
@@ -41,21 +41,21 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
   const [banks, setBanks] = useState([]);
   const [categories, setCategories] = useState([]);
 
-  function clearForm() {
-    formik.setValues(values);
-    setOpenNew(false);
-  }
+  useEffect(() => {
+    if (!openNew) {
+      formik.resetForm();
+    }
+  }, [openNew]);
 
   function handleSubmit() {
     if (cancel) return;
 
-    console.log("aqui")
     const params = {
       titulo: formik.values.title,
       descricao: formik.values.description,
       valor: formik.values.value,
       data_venc: moment(formik.values.dateExpect).format("YYYY/MM/DD"),
-      data_pag: moment(formik.values.payday).format("YYYY/MM/DD"),
+      data_pag: null,
       tipo: formik.values.type,
       status: formik.values.status,
       modo_pagamento: formik.values.paymentMode,
@@ -77,6 +77,7 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
         console.log(error);
       })
       .finally(() => formik.setSubmitting(false));
+    formik.resetForm();
   }
 
   //UseEffect para trazer os bancos
@@ -115,12 +116,13 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
     <>
       <div>
         <Dialog
+          style={{ marginTop: 60 }}
           open={openNew}
           onClose={() => {
             setOpenNew(false);
           }}
         >
-          <form onSubmit={formik.handleSubmit} style={{ height: "370px" }}>
+          <form onSubmit={formik.handleSubmit} style={{ height: "570px" }}>
             <DialogTitle>New transation</DialogTitle>
             <DialogContent>
               {/* Title  */}
@@ -137,6 +139,7 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
               />
               {/* Description  */}
               <TextField
+                style={{ marginTop: 30 }}
                 autoFocus
                 margin="dense"
                 name="description"
@@ -149,6 +152,7 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
               />
               {/* Value  */}
               <TextField
+                style={{ marginTop: 30 }}
                 autoFocus
                 margin="dense"
                 name="value"
@@ -189,42 +193,33 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
               {/* Status  */}
               <InputLabel style={{ marginTop: 30 }}>Status</InputLabel>
               <Select
-                style={{ width: "100%" }}
+                style={{ width: "100%", height: "100%" }}
                 label="Status"
                 name="status"
                 value={formik.values.status}
                 onChange={formik.handleChange}
               >
-                <MenuItem value={"Paga"}>Paga</MenuItem>
-                <MenuItem value={"Pendente"}>Pendente</MenuItem>
-                <MenuItem value={"Vencida"}>Vencida</MenuItem>
+                <MenuItem value={"Aberta"}>Aberta</MenuItem>
+                <MenuItem value={"Fechada"}>Fechada</MenuItem>
               </Select>
 
-              {/* Date  */}
-              <InputLabel style={{ marginTop: 30 }}>Payday</InputLabel>
-              <TextField
-                autoFocus
-                margin="dense"
-                name="payday"
-                type="date"
-                fullWidth
-                variant="standard"
-                value={formik.values?.payday}
-                onChange={formik.handleChange}
-              />
-
               {/* Payment  */}
-              <TextField
-                autoFocus
-                margin="dense"
-                name="paymentMode"
+              <InputLabel style={{ marginTop: 30 }}>Payment</InputLabel>
+              <Select
+                style={{ width: "100%", marginTop: 10 }}
                 label="Payment Mode"
-                type="text"
-                fullWidth
-                variant="standard"
-                value={formik.values?.paymentMode}
+                name="paymentMode"
+                value={formik.values.paymentMode}
                 onChange={formik.handleChange}
-              />
+              >
+                <MenuItem value={"Pix"}>Pix</MenuItem>
+                <MenuItem value={"Debito"}>Débito</MenuItem>
+                <MenuItem value={"Credito"}>Crédito</MenuItem>
+                <MenuItem value={"Dinheiro"}>Dinheiro</MenuItem>
+                <MenuItem value={"Boleto"}>Boleto</MenuItem>
+                {/* <MenuItem value={"Fechada"}>Transferência</MenuItem> */}
+                <MenuItem value={"Cheque"}>Cheque</MenuItem>
+              </Select>
 
               {/* Category  */}
               <InputLabel style={{ marginTop: 30 }}>Categories</InputLabel>
@@ -267,8 +262,8 @@ function ModalNewTransation({ openNew, setOpenNew, refreshTransations }) {
             <DialogActions>
               <Button
                 onClick={() => {
-                  clearForm();
                   setCancel(true);
+                  setOpenNew(false);
                 }}
               >
                 Cancel

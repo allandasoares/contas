@@ -1,9 +1,13 @@
 import {
   Button,
+  ButtonGroup,
   Card,
   CardActions,
   CardContent,
+  CardHeader,
+  CardMedia,
   Chip,
+  IconButton,
   Typography,
 } from "@material-ui/core";
 import { Box, Grid } from "@mui/material";
@@ -56,7 +60,7 @@ function ListTransations() {
     api
       .delete(`/transation/${id}`)
       .then((response) => {
-        toast.success("transation excluída com sucesso!");
+        toast.success("Transation excluída com sucesso!");
         loadTransations();
       })
       .catch((error) => {
@@ -81,12 +85,22 @@ function ListTransations() {
 
       <SideMenu>
         <Box className="backgroundHome">
-          <Grid container color={"#bbb5b5"} style={{ marginTop: 20 }}>
-            <Typography>Transations</Typography>
+          <Grid
+            container
+            color={"#bbb5b5"}
+            style={{ marginTop: 20, marginLeft: 20 }}
+          >
+            <Typography variant="h5" style={{ color: "#e4e0e0" }}>
+              Transations
+            </Typography>
             <Button
               size="small"
               variant="contained"
-              style={{ background: "#4ac2c8", marginLeft: "20px" }}
+              style={{
+                background: "#3fc290",
+                marginLeft: "20px",
+                color: "#ffffff",
+              }}
               onClick={() => {
                 setOpenNew(true);
               }}
@@ -99,109 +113,120 @@ function ListTransations() {
           <div style={{ overflow: "auto", width: "96vw", height: "80vh" }}>
             <Grid container spacing={0}>
               {transations.map((transation) => {
+                console.log(transation.banco.nome);
                 return (
                   <Grid
                     item
                     xs={12}
                     sm={6}
                     md={3}
-                    style={{ marginTop: 20 }}
+                    style={{ marginTop: 50, marginLeft: 80 }}
                     key={transation.id}
                   >
                     <Box>
                       <Card
                         style={{
-                          background: "#393333",
+                          borderRadius: "25px",
+                          background: "#292a2e",
                           width: 350,
                           color: "#bbb5b5",
                         }}
                       >
-                        <Fragment>
-                          <CardContent>
-                            <Typography>Título: {transation.titulo}</Typography>
-                            <Typography>
-                              Descrição: {transation.descricao}
-                            </Typography>
-
-                            <Typography>Valor: {transation.valor}</Typography>
-
-                            <Typography>
-                              Data de vencimento:{" "}
-                              {moment(transation.data_venc).format("DD/MM/YYYY")}
-                            </Typography>
-
-                            <Typography>
-                              Data de pagamento:{" "}
-                              {moment(transation.data_pag).format("DD/MM/YYYY")}
-                            </Typography>
-
-                            {/* <Typography>Status: {transation.status}</Typography> */}
-
-                            <Typography>
-                              Modo Pagamento: {transation.modo_pagamento}
-                            </Typography>
-
+                        <CardHeader
+                          avatar={
                             <Chip
-                              label={transation.status}
+                              label={transation.categoria.titulo}
+                              size="small"
                               style={{
-                                backgroundColor:
-                                  transation.status == "Paga"
-                                    ? "#74ce67"
-                                    : transation.status == "Pendente"
-                                    ? "#db8942"
-                                    : transation.status == "Vencida"
-                                    ? "#cd5858"
-                                    : "#888282",
+                                color: "#ffffff",
+                                background: `${transation.categoria.cor}`,
                               }}
                             />
-                            {/* <Typography>
-                        Categoria: {transation.categoria}
-                      </Typography>
+                          }
+                          title={
+                            <Typography variant="h5">
+                              {transation.titulo}
+                            </Typography>
+                          }
+                          // subheader="September 14, 2016"
+                          action={
+                            <ButtonGroup aria-label="settings">
+                              <EditIcon
+                                style={{
+                                  cursor: "pointer",
+                                  color: "#bbb5b5",
+                                  marginTop: 10,
+                                }}
+                                onClick={() => {
+                                  setOpenEdit(true);
+                                  setTransation(transation);
+                                }}
+                              ></EditIcon>
+                              <DeleteIcon
+                                style={{
+                                  cursor: "pointer",
+                                  color: "#bbb5b5",
+                                  marginTop: 10,
+                                }}
+                                onClick={() => {
+                                  handleDelete(transation.id);
+                                }}
+                              ></DeleteIcon>
+                            </ButtonGroup>
+                          }
+                        />
 
-                      <Typography>
-                        Banco: {transation.banco}
-                      </Typography> */}
-                          </CardContent>
+                        <CardContent>
+                          <Typography variant="h6">
+                           {transation.tipo}
+                          </Typography>
+                          <Typography variant="h6">
+                            {transation.modo_pagamento}
+                          </Typography>
+                          <Typography variant="h6">
+                            R$ {transation.valor}
+                          </Typography>
+                          <Typography variant="h6">
+                            {transation.descricao}
+                          </Typography>
+                          <Typography variant="h6">
+                            {transation.status}
+                          </Typography>
+                          <Typography variant="h6" color="error">
+                            {moment(transation.data_venc).format("DD/MM/YYYY")}
+                          </Typography>
+                        </CardContent>
 
-                          <CardActions>
-                            {/* <Button
-                              size="small"
-                              variant="contained"
-                              style={{ background: "#d85a5a", color: "#fff" }}
-                              onClick={() => {
-                                handleDelete(transation.id);
-                              }}
-                            >
-                              Delete
-                            </Button>
-                            <Button
-                              size="small"
-                              variant="contained"
-                              style={{ background: "#f19a58", color: "#fff" }}
-                              onClick={() => {
-                                setOpenEdit(true);
-                                setTransation(transation);
-                              }}
-                            >
-                              Edit
-                            </Button> */}
-
-                            <DeleteIcon
-                              style={{ cursor: "pointer" }}
-                              onClick={() => {
-                                handleDelete(transation.id);
-                              }}
-                            ></DeleteIcon>
-
-                            <EditIcon
-                              style={{ cursor: "pointer" }}
-                              onClick={() => {
-                                setOpenEdit(true);
-                                setTransation(transation);
-                              }}
-                            ></EditIcon>
-                          </CardActions>
-                        </Fragment>
+                        <CardMedia
+                          style={{
+                            width: 70,
+                            height: 70,
+                            marginLeft: "auto",
+                            marginRight: 10,
+                          }}
+                          component="img"
+                          image={
+                            transation.banco.nome === "Nubank"
+                              ? "/logoNu.png"
+                              : transation.banco.nome === "Neon"
+                              ? "/logoNeon.png"
+                              : transation.banco.nome === "Itau"
+                              ? "/logoItau.png"
+                              : transation.banco.nome === "Caixa"
+                              ? "/logoCaixa.png"
+                              : transation.banco.nome === "BB"
+                              ? "/logoBB.png"
+                              : transation.banco.nome === "Bradesco"
+                              ? "/logoBradesco.png"
+                              : transation.banco.nome === "Pan"
+                              ? "/logoPan.png"
+                              : transation.banco.nome === "Cofrinho"
+                              ? "/logoCofre.png"
+                              : transation.banco.nome === "Inter"
+                              ? "/logoInter.png"
+                              : "nada"
+                          }
+                        />
                       </Card>
                     </Box>
                   </Grid>

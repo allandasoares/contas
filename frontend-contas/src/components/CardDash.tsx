@@ -11,8 +11,8 @@ const IconWrapperStyle = styled("div")(({ theme }) => ({
   display: "flex",
   borderRadius: "50%",
   alignItems: "center",
-  width: theme.spacing(8),
-  height: theme.spacing(8),
+  width: theme.spacing(5),
+  height: theme.spacing(5),
   justifyContent: "center",
   marginBottom: theme.spacing(3),
 }));
@@ -25,13 +25,14 @@ export default function CardDash({ title, total, icon, color = "primary" }) {
       sx={{
         py: 5,
         boxShadow: 0,
+        borderRadius: 7,
         textAlign: "center",
         color: (theme) => theme.palette[color].darker,
         bgcolor: (theme) => theme.palette[color].lighter,
       }}
       style={{
-        backgroundColor: "#9dc5c3",
-        backgroundImage: "linear-gradient(315deg, #9dc5c3 0%, #5e5c5c 74%)",
+        backgroundColor: "#9dc5b3",
+        backgroundImage: "linear-gradient(315deg, #5a5f5c 0%, #273b35 74%)",
       }}
     >
       <IconWrapperStyle

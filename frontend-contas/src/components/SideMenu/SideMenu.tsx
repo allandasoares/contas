@@ -66,9 +66,9 @@ export default function SideMenu({ children }) {
   return (
     <Box sx={{ display: "flex" }}>
       <TopBar />
-      <Drawer variant="permanent" sx={{ background: "lime" }}>
-        <Divider />
-        <List style={{ marginTop: "auto", marginBottom: "auto" }}>
+      <Drawer variant="permanent" style={{ background: "lime" }} >
+        <Divider sx={{boxShadow: "none"}}/>
+        <List style={{ marginTop: "100px", marginBottom: "auto" }}>
           {menuItems.map((item, index) => (
             <ListItem
               key={index}
@@ -98,7 +98,7 @@ export default function SideMenu({ children }) {
           ))}
         </List>
       </Drawer>
-      <div style={{ paddingTop: 70 }}>
+      <div style={{ paddingTop: 70}}>
         {/* <DrawerHeader /> */}
         {children}
       </div>

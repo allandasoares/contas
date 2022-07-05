@@ -11,6 +11,7 @@ import toast from "react-hot-toast";
 import SideMenu from "../../components/SideMenu/SideMenu";
 import api from "./../../services/Api";
 import ModalBank from "../../components/ModalBanks/ModalBank";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const values = {
   name: "",
@@ -19,7 +20,7 @@ const values = {
 };
 
 export default function ListBank() {
-  const [open, setOpen] = useState(false);
+  const [openBank, setOpenBank] = useState(false);
   const [banks, setBanks] = useState([]);
   const [bank, setBank] = useState({});
   // const [selectedBank, setSelectedBank] = useState(values);
@@ -44,8 +45,8 @@ export default function ListBank() {
     api
       .delete(`/bank/${id}`)
       .then((response) => {
-          toast.success("Banco excluído com sucesso!");
-          loadBanks();
+        toast.success("Banco excluído com sucesso!");
+        loadBanks();
       })
       .catch((error) => {
         toast.error("Erro ao excluir banco");
@@ -55,22 +56,32 @@ export default function ListBank() {
   return (
     <>
       <ModalBank
-        open={open}
-        setOpen={setOpen}
+        openBank={openBank}
+        setOpenBank={setOpenBank}
         refreshBanks={loadBanks}
         bank={bank}
       ></ModalBank>
 
       <SideMenu>
         <Box className="backgroundHome">
-          <Grid container color={"#bbb5b5"} style={{ marginTop: 20 }}>
-            <Typography>Banks</Typography>
+          <Grid
+            container
+            color={"#bbb5b5"}
+            style={{ marginTop: 20, marginLeft: 20 }}
+          >
+            <Typography variant="h5" style={{ color: "#e4e0e0" }}>
+              Banks
+            </Typography>
             <Button
               size="small"
               variant="contained"
-              style={{ background: "#4ac2c8", marginLeft: "20px" }}
+              style={{
+                background: "#3fc290",
+                marginLeft: "20px",
+                color: "#ffffff",
+              }}
               onClick={() => {
-                setOpen(true);
+                setOpenBank(true);
               }}
             >
               New
@@ -78,23 +89,43 @@ export default function ListBank() {
           </Grid>
 
           {/* Cards  */}
-          <div style={{ overflow: "auto", width: "96vw", height: "80vh" }}>
+          <div
+            style={{
+              overflow: "auto",
+              width: "96vw",
+              height: "80vh",
+              marginLeft: 20,
+            }}
+          >
             <Grid container spacing={0}>
               {banks.map((bank) => {
                 return (
-                  <Grid item xs={12} sm={6} md={3} style={{ marginTop: 20 }} key={bank.id}>
+                  <Grid
+                    item
+                    xs={12}
+                    sm={6}
+                    md={3}
+                    style={{ marginTop: 20 }}
+                    key={bank.id}
+                  >
                     <Box>
                       <Card
                         variant="outlined"
                         style={{
-                          background: "#393333",
+                          borderRadius: "25px",
+                          background: "#292a2e",
                           width: 300,
                           color: "#bbb5b5",
                         }}
                       >
                         <Fragment>
                           <CardContent>
-                            <Typography>{bank.nome}</Typography>
+                            <Typography
+                              variant="h6"
+                              style={{ color: "#ffffff" }}
+                            >
+                              {bank.nome}
+                            </Typography>
                             <Typography>
                               Saldo Inicial: {bank.saldo_inicial}
                             </Typography>
@@ -103,23 +134,15 @@ export default function ListBank() {
                             </Typography>
                           </CardContent>
                           <CardActions>
-                            <Button
-                              size="small"
-                              variant="contained"
-                              style={{ background: "#d85a5a" }}
+                            <DeleteIcon
+                              style={{
+                                cursor: "pointer",
+                                color: "#bbb5b5",
+                              }}
                               onClick={() => {
                                 handleDelete(bank.id);
                               }}
-                            >
-                              Delete
-                            </Button>
-                            {/* <Button
-                        size="small"
-                        variant="contained"
-                        style={{ background: "#f19a58" }}
-                        >
-                        Edit
-                      </Button> */}
+                            ></DeleteIcon>
                           </CardActions>
                         </Fragment>
                       </Card>
