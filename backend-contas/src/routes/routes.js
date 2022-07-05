@@ -42,7 +42,6 @@ router.delete("/usuarios/:id", verifyJwt, async (req, res) => {
 //Index
 router.get("/usuarios", verifyJwt, async (req, res) => {
   const response = await controllerUser.index();
-  console.log('USEID',req.userId)
   res.status(response.code).json(response);
 });
 
@@ -202,7 +201,6 @@ router.put("/category/:id", verifyJwt, async (req, res) => {
 //===============================TRANSATION===============================//
 //Create
 router.post("/transation", verifyJwt, async (req, res) => {
-  console.log("AAAAAAAAAAAAAAAAAAAAAAAAAA", req.body)
   const {
     titulo,
     descricao,
@@ -278,6 +276,12 @@ router.put("/transation/:id", verifyJwt, async (req, res) => {
     categoria_id,
     banco_id,
   });
+  res.status(response.code).json(response);
+});
+
+//Index
+router.get("/dashboard", verifyJwt, async (req, res) => {
+  const response = await controllerTransation.dashboard();
   res.status(response.code).json(response);
 });
 
